@@ -2,6 +2,10 @@ package com.bourntec.HITHRON.controller;
 
 import java.util.List;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,7 +48,7 @@ class UserController{
     }
 
     @GetMapping("/{id}/{flag}")
-    public UserEntity getUserById(@PathVariable("id") Integer userId,@PathVariable("flag") Boolean flag){
+    public UserEntity getUserById(@PathVariable("id")  @NotBlank @Max(value = 10, message="Enter valid user id < 10") Integer userId,@PathVariable("flag") @NotBlank Boolean flag){
         return userService.getUserById(userId,flag);
     }
 }
